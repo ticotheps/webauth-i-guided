@@ -54,13 +54,17 @@ server.post('/api/login', (req, res) => {
     });
 });
 
+function restricted() {
+
+};
+
 // Goal: protect this route! Only authenticated users should see it!
 // If using postman, a user should NOT be able to return the list 
 // of users when performing a GET request and using the headers as
 // the means of passing the 'username' and 'password' to the endpoint
 // (instead of doing a POST request and passing those key/value pairs as
 // an object on req.body).
-server.get('/api/users', (req, res) => {
+server.get('/api/users', restricted, (req, res) => {
   Users.find()
     .then(users => {
       res.json(users);
