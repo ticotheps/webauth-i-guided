@@ -21,7 +21,9 @@ server.post('/api/register', (req, res) => {
 
   // generate hash from user's password
   const hash = bcrypt.hashSync(user.password, 16); // 2 ^ n ("rounds" of hashing)
+  
   // override user.password with hash
+  user.password = hash;
 
   Users.add(user)
     .then(saved => {
