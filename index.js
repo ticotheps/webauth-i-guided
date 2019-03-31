@@ -18,6 +18,10 @@ server.get('/', (req, res) => {
 server.post('/api/register', (req, res) => {
   let user = req.body;
 
+  // generate hash from user's password
+
+  // override user.password with hash
+
   Users.add(user)
     .then(saved => {
       res.status(201).json(saved);
