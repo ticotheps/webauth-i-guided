@@ -94,5 +94,18 @@ server.get('/api/users', restricted, (req, res) => {
     .catch(err => res.send(err));
 });
 
+// BELOW: Proper syntax to make the above GET request handler asynchronous with a
+// different endpoint
+//
+// server.get('/users', restricted, async (req, res) => {
+//   try {
+//     const users = await Users.find();
+
+//     res.json(users);
+//   } catch (error) {
+//     res.send(err)
+//   }
+// });
+
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`\n** Running on port ${port} **\n`));
