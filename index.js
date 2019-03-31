@@ -76,6 +76,9 @@ function restricted(req, res, next) {
   }
 }
 
+// if using axios, the syntax will look like this: 
+// "axios.get(url, { headers: { username, password } })"
+
 
 // Goal: protect this route! Only authenticated users should see it!
 // If using postman, a user should NOT be able to return the list 
