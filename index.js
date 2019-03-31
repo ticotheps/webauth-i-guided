@@ -54,7 +54,7 @@ server.post('/api/login', (req, res) => {
     });
 });
 
-function restricted() {
+function restricted(req, res, next) {
   const { username, password } = req.headers;
 
   if (username && password) {
@@ -69,7 +69,7 @@ function restricted() {
       }
     })
     .catch(error => {
-      res.status(500).json({ message: 'No credentials provided' });
+      res.status(500).json({ message: 'Ran into an unexpected error' });
     });
   } else {
     res.status(400).json({ message: 'No credentials provided' });
