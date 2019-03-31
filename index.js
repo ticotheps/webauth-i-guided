@@ -55,8 +55,27 @@ server.post('/api/login', (req, res) => {
 });
 
 function restricted() {
+  const { username, password } = req.headers;
 
-};
+  if (username && password) {
+    Users.findBy({ username })
+    .first()
+    .then(user => {
+      // check that passwords match
+      if (user && bcrypt.compareSync(password, user.password)) {
+        next();
+      } else {
+        res.status(401).json({ message: 'Invalid Credentials' });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({ message: 'No credentials provided' });
+    });
+  } else {
+    res.status(400).json({ message: 'No credentials provided' });
+  }
+}
+
 
 // Goal: protect this route! Only authenticated users should see it!
 // If using postman, a user should NOT be able to return the list 
