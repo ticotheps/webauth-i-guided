@@ -9,6 +9,19 @@ const Users = require('./users/users-model.js');
 
 const server = express();
 
+// Day 2, Step 3: Define 'sessionConfig'
+const sessionConfig = {
+  name: 'monkey',
+  secret: 'keep it secret, keep it safe!',
+  cookie: {
+    maxAge: 1000 * 60 * 15, // in milliseconds
+    secure: false, // used over https ONLY; 'false' for development purposes, 'true' for production
+  },
+  httpOnly: true, // cannot access the cookie from JS using document.cookie; you want this 'true' 99% of the time
+  resave: false, // "Do I want to save this every time, on every request, even if nothing has changed?"
+  saveUninitialized: false, // laws against setting cookies automatically so keep it 'false'
+}
+
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
