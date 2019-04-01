@@ -2,30 +2,30 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
-const session = require('express-session'); // Day 2, Step 1: Import express-session
+const session = require('express-session'); // (Day 2) Step 1: Import express-session
 
 const db = require('./database/dbConfig.js');
 const Users = require('./users/users-model.js');
 
 const server = express();
 
-// Day 2, Step 3: Define 'sessionConfig'
+// (Day 2) Step 3: Define 'sessionConfig'
 const sessionConfig = {
   name: 'monkey',
   secret: 'keep it secret, keep it safe!',
   cookie: {
-    maxAge: 1000 * 60 * 15, // in milliseconds
+    maxAge: 1000 * 60 * 15, // in milliseconds; equal to '15 minutes' that the cookie is available
     secure: false, // used over https ONLY; 'false' for development purposes, 'true' for production
   },
   httpOnly: true, // cannot access the cookie from JS using document.cookie; you want this 'true' 99% of the time
   resave: false, // "Do I want to save this every time, on every request, even if nothing has changed?"
-  saveUninitialized: false, // laws against setting cookies automatically so keep it 'false'
+  saveUninitialized: false, // GDPR laws against setting cookies automatically so keep it 'false'
 }
 
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
-server.use(session(sessionConfig)); // Day 2, Step 2: Tells the server to use express-session
+server.use(session(sessionConfig)); // (Day 2) Step 2: Tells the server to use express-session
 
 server.get('/', (req, res) => {
   res.send("It's alive!");
