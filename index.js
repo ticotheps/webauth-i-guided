@@ -72,7 +72,8 @@ server.post('/api/login', (req, res) => {
     });
 });
 
-
+// (Day 2) Step 4: Modify the old middleware with simpler syntax that uses sessions
+// new middleware with use of cookies
 function restricted(req, res, next) {
 
   if (req.session && req.session.username) {
@@ -83,6 +84,7 @@ function restricted(req, res, next) {
 }
 
 // BELOW CODE IS NO LONGER NEEDED BECAUSE OF COOKIES
+// -------OLD MIDDLEWARE (BEFORE COOKIES)-----------
 // function restricted(req, res, next) {
 //   const { username, password } = req.headers;
 
