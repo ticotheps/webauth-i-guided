@@ -144,5 +144,20 @@ server.get('/api/users', restricted, (req, res) => {
 //   }
 // });
 
+// (Day 2) Step 7: Creating a logout endpoint.
+server.get('/api/logout', (req, res) => {
+  if (req.session) {
+    req.session.destroy(error => {
+      if (error) {
+        res.send('You can checkout any time you like, but you can never leave...');
+      } else {
+        res.send('Bye! Thanks for plaing!');
+      }
+    });
+  } else {
+    res.end();
+  }
+});
+
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`\n** Running on port ${port} **\n`));
