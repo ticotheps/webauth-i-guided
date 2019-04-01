@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const session = require('express-session'); // (Day 2) Step 1: Install + Import express-session
 const KnexSessionStore = require('connect-session-knex')(session); // (Day 2) Step 8: Install + Import connect-session-knex
 
+// (Day 2) Step 9: Curry the 'KnexSessionStore(session);' statement.
 // BELOW: We don't need this invokation any more because we will just
 // curry this statement on to the 'KnexSessionStore' variable above.
 // ---------------------------
@@ -26,7 +27,16 @@ const sessionConfig = {
   httpOnly: true, // cannot access the cookie from JS using document.cookie; you want this 'true' 99% of the time
   resave: false, // "Do I want to save this every time, on every request, even if nothing has changed?"
   saveUninitialized: false, // GDPR laws against setting cookies automatically so keep it 'false'
-}
+
+  // (Day 2) Step 10: Create a new 'store' key/value pair on the 'sessionConfig' object.
+  store: new KnexSessionStore({
+    knex: db,
+    tablename: 'sessions',
+    sidfieldname: 'sid',
+    createtable: true,
+    clearInterval: 1000 * 60 * 60, // ONE HOUR (in ms)
+  }),
+};
 
 server.use(helmet());
 server.use(express.json());
