@@ -44,7 +44,7 @@ server.post('/api/register', (req, res) => {
 
   Users.add(user)
     .then(saved => {
-      // HERE is where we can USE the session data
+      // (Day 2) Step 6: HERE is where we can PERSIST the session data for the user
       req.session.username = saved;
 
       res.status(201).json(saved);
