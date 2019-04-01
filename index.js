@@ -12,6 +12,7 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
+server.use(session(sessionConfig)); // Day 2, Step 2: Tells the server to use express-session
 
 server.get('/', (req, res) => {
   res.send("It's alive!");
