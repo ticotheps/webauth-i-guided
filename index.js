@@ -59,6 +59,7 @@ server.post('/api/login', (req, res) => {
     .then(user => {
       // check that passwords match
       if (user && bcrypt.compareSync(password, user.password)) {
+        // (Day 2) Step 4: Store cookie data by using the 'session' object.
         // HERE is where we would like to save cookie data regarding the session
         req.session.username = user.username;
 
@@ -72,7 +73,7 @@ server.post('/api/login', (req, res) => {
     });
 });
 
-// (Day 2) Step 4: Modify the old middleware with simpler syntax that uses sessions
+// (Day 2) Step 5: Modify the old middleware with simpler syntax that uses sessions
 // new middleware with use of cookies
 function restricted(req, res, next) {
 
