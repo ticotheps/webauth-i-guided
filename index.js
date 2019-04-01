@@ -45,6 +45,8 @@ server.post('/api/register', (req, res) => {
   Users.add(user)
     .then(saved => {
       // (Day 2) Step 6: HERE is where we can PERSIST the session data for the user
+      // The SESSION is stored on the server.
+      // The COOKIE is sent to the browser.
       req.session.username = saved;
 
       res.status(201).json(saved);
