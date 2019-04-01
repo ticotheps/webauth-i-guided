@@ -59,7 +59,7 @@ server.post('/api/login', (req, res) => {
     .then(user => {
       // check that passwords match
       if (user && bcrypt.compareSync(password, user.password)) {
-        // (Day 2) Step 4: Store cookie data by using the 'session' object.
+        // (Day 2) Step 4: Store cookie data by using the 'req.session' object.
         // HERE is where we would like to save cookie data regarding the session
         req.session.username = user.username;
 
