@@ -14,7 +14,7 @@ const sessionConfig = {
   name: 'monkey',
   secret: 'keep it secret, keep it safe!',
   cookie: {
-    maxAge: 1000 * 60 * 15, // in milliseconds; equal to '15 minutes' that the cookie is available
+    maxAge: 1000 * 60 * 15, // time that the cookie lives (in milliseconds); equal to '15 minutes'
     secure: false, // used over https ONLY; 'false' for development purposes, 'true' for production
   },
   httpOnly: true, // cannot access the cookie from JS using document.cookie; you want this 'true' 99% of the time
@@ -59,8 +59,10 @@ server.post('/api/login', (req, res) => {
     .then(user => {
       // check that passwords match
       if (user && bcrypt.compareSync(password, user.password)) {
-        // Here is where we would like to save cookie data regarding the session
-        res.status(200).json({ message: `Welcome ${user.username}!` });
+        // HERE is where we would like to save cookie data regarding the session
+        req.session.username = user.username;
+
+        res.status(200).json({ message: `Welcome ${user.username}!, have a cookie...` });
       } else {
         res.status(401).json({ message: 'Invalid Credentials' });
       }
