@@ -44,6 +44,7 @@ server.post('/api/login', (req, res) => {
     .then(user => {
       // check that passwords match
       if (user && bcrypt.compareSync(password, user.password)) {
+        // Here is where we would like to save cookie data regarding the session
         res.status(200).json({ message: `Welcome ${user.username}!` });
       } else {
         res.status(401).json({ message: 'Invalid Credentials' });
