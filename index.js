@@ -34,7 +34,9 @@ const sessionConfig = {
     tablename: 'sessions',
     sidfieldname: 'sid',
     createtable: true,
-    clearInterval: 1000 * 60 * 60, // ONE HOUR (in ms)
+    clearInterval: 1000 * 60 * 60, 
+    // This is how often the database will clear the expired sessions from the 'sessions' 
+    // table to prevent it from getting too big (ONE HOUR; in ms).
   }),
 };
 
