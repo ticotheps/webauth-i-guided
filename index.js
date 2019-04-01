@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const session = require('express-session'); // (Day 2) Step 1: Install + Import express-session
+const KnexSessionStore = require('connect-session-knex'); // (Day 2) Step 8: Install + Import connect-session-knex
 
 const db = require('./database/dbConfig.js');
 const Users = require('./users/users-model.js');
