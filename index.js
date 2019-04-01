@@ -44,6 +44,9 @@ server.post('/api/register', (req, res) => {
 
   Users.add(user)
     .then(saved => {
+      // HERE is where we can USE the session data
+      req.session.username = saved;
+
       res.status(201).json(saved);
     })
     .catch(error => {
