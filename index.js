@@ -2,7 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
-const session = require('express-session'); // (Day 2) Step 1: Import express-session
+const session = require('express-session'); // (Day 2) Step 1: Install + Import express-session
 
 const db = require('./database/dbConfig.js');
 const Users = require('./users/users-model.js');
